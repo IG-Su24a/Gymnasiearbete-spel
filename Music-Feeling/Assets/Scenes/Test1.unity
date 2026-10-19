@@ -1035,8 +1035,8 @@ GameObject:
   - component: {fileID: 1727742594}
   - component: {fileID: 1727742593}
   - component: {fileID: 1727742592}
-  - component: {fileID: 1727742596}
   - component: {fileID: 1727742595}
+  - component: {fileID: 1727742596}
   m_Layer: 3
   m_Name: Ground
   m_TagString: Untagged

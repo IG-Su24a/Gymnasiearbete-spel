@@ -1,18 +1,25 @@
 using System.Threading.Tasks;
+using UnityEditor.Tilemaps;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
     private Animator anim;
+
     public float moveSpeed = 5f;
     public float jumpForce = 10f;
     public Transform groundCheck;
     public float groundCheckRadius = 0.2f;
     public LayerMask groundlayer;
+
     bool isRunning = false;
 
+    [Header("Grounding")]
+
+    private int facingDirection = 1;
     private Rigidbody2D rb;
     private bool isGrounded;
+    private float horizontal; 
 
     private void Awake()
     {
@@ -27,6 +34,12 @@ public class PlayerMovement : MonoBehaviour
     async Task Update()
     {
         float moveinput = Input.GetAxis("Horizontal");
+
+        if (horizontal > .1f && facingDirection < 0 || horizontal < -.1f && facingDirection > 0)
+        {
+            Flip();
+        }
+
         anim.SetBool("isRunning", moveinput != 0);
         rb.linearVelocity = new Vector2(moveinput * moveSpeed, rb.linearVelocity.y);
 
@@ -43,5 +56,14 @@ public class PlayerMovement : MonoBehaviour
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundlayer);
         Debug.Log("Is Grounded: " + isGrounded); 
+    }
+
+    void Flip()
+    {
+        facingDirection *= -1;
+
+        Vector3 scale = transform.localScale;
+        scale.x *= -1;
+        transform.localScale = scale; 
     }
 }

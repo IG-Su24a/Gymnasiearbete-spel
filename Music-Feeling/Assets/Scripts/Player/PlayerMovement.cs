@@ -35,7 +35,8 @@ public class PlayerMovement : MonoBehaviour
     {
         float moveinput = Input.GetAxis("Horizontal");
 
-        if (horizontal > .1f && facingDirection < 0 || horizontal < -.1f && facingDirection > 0)
+        if (moveinput > 0 && facingDirection < 0 ||
+            moveinput < 0 && facingDirection > 0)
         {
             Flip();
         }

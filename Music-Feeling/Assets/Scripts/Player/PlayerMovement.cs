@@ -31,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
    
-    async Task Update()
+     void Update()
     {
         float moveinput = Input.GetAxis("Horizontal");
 
@@ -47,7 +47,6 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             anim.SetTrigger("Jump");
-            await Task.Delay(200);
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
             
         }
